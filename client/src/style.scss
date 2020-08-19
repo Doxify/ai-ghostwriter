@@ -1,10 +1,30 @@
-// $body-bg: #fff;
-// $primary: #375E97;
-// $info: #548de4;
-// $warning: #FB6542;
-// $success: #61b341;
-// $dark: #0b0e1f;
-
+$body-bg: rgb(247, 245, 245);
+$primary: #375E97;
+$secondary: #1A5AD9;
+$info: #1D64F2;
+$warning: #F24957;
+$success: #4ff249;
+$dark: #0b0e1f;
 
 // Importing Bootstrap and it's default values
 @import '~bootstrap/scss/bootstrap.scss';
+
+body {
+    background-image: url('./images/pattern.png');
+}
+
+// For changing font family
+:root {
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
+// Making mark use our color scheme
+mark {
+    background-color: $primary;
+    color: white;
+}
+
+
+.form-control {
+    border-color: $primary !important;
+}

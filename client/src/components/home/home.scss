@@ -1,0 +1,14 @@
+.generator-container {
+    background-color: white !important;
+    margin: auto;   
+}
+
+.hero-title {
+    position: absolute;    /*matches #content position*/
+    bottom: 72px; left: 72px;    /*matches #content position*/
+    width: 300px;    /*matches #content width*/
+    height: 100px;    /*matches #content height*/
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+    z-index: -1;
+  }

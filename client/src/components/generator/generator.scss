@@ -1,0 +1,12 @@
+@import '../../style.scss';
+
+.card {
+    padding: 5px;
+    width: 30rem;
+    height: 18rem;
+    border: 1px solid $black !important;
+    border-radius: 5%;
+    white-space: pre-line !important;
+    overflow: scroll !important;
+    text-overflow: clip !important;
+}
