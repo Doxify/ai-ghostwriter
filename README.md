@@ -21,5 +21,5 @@ AI Ghostwriter is an app that uses RNN to generate texts in various languages. I
   * API should be fairly simple, just take in keywords and return text.
   
 ## Wireframe:
-![image](https://i.imgur.com/VdqGtff.png)
+![image](https://i.imgur.com/GOZRLYC.png)
 ![image](https://i.imgur.com/7VqznJo.png)
