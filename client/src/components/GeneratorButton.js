@@ -1,6 +1,8 @@
 import React from 'react';
 import './components.scss';
 
+import axios from 'axios';
+
 class GeneratorButton extends React.Component {
     constructor(props) {
         super(props);
@@ -17,12 +19,24 @@ class GeneratorButton extends React.Component {
     }
 
     handleChange(event) {
-        event.preventDefault();
         this.setState({ [event.target.name]: event.target.value });
     }
 
     handleSubmit(event) {
-        // Make the API call here and redirect on generation
+        event.preventDefault();
+        const form = {
+            input: this.state.input
+        };
+
+        // axios.post(`${process.env.REACT_APP_API_URL}/generate`, form)
+        //     .then((result) => {
+        //         if(result) {
+        //             // TODO: Successfully generated
+        //             // 1. Save generation id to local storage so you can view your past generations?
+        //             // 2. Save the input with the generation output (API idea)
+        //             // 3. Redirect to the expanded view page.
+        //         }
+        //     })
     }
     
     render() {
@@ -40,20 +54,20 @@ class GeneratorButton extends React.Component {
                         placeholder="Enter three words..."
                         aria-label="Text input with segmented dropdown button"
                     />
-                    <button type="button" className="btn btn-primary">Generate</button>
+                    <button type="submit" className="btn btn-primary">Generate</button>
                     
                     {/* Selecting language */}
-                    <button type="button" className="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+                    {/* <button type="button" className="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                         <span className="sr-only">Toggle Dropdown</span>
                     </button>
-                    <ul className="dropdown-menu dropdown-menu-right">
+                    <ul className="dropdown-menu dropdown-menu-right" dropdown-toggle="dropdown">
                         <li><span className="dropdown-item">English</span></li>
                         <li><span className="dropdown-item">Spanish</span></li>
                         <li><span className="dropdown-item">Romanian</span></li>
                         <li><span className="dropdown-item">Russian</span></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><span className="dropdown-item">Java Byte Code</span></li>
-                    </ul>
+                    </ul> */}
                 </div>
             </form>
         )

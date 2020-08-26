@@ -25,24 +25,6 @@ class HeroGenerator extends React.Component {
                         <div className="col-sm-12 col-md-4 col-lg-4 text-center m-2">
                             <Thumbnail />
                         </div>
-                        <div className="col-sm-12 col-md-4 col-lg-4 text-center">
-                            <Thumbnail />
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-4 text-center">
-                            <Thumbnail />
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-4 text-center">
-                            <Thumbnail />
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-4 text-center">
-                            <Thumbnail />
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-4 text-center">
-                            <Thumbnail />
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-4 text-center">
-                            <Thumbnail />
-                        </div>
                     </div>
                 </div>
             </div>
