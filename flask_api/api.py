@@ -1,12 +1,12 @@
 import flask
 from flask import Flask, request
 
-from model.rnn import Model
+from rnn import Model
 
 # Creating Flask app
 app = Flask(__name__)
 # Loading the model
-model = Model('model/input.txt', 'model/latest')
+model = Model('../model/input.txt', '../model/latest')
 
 # Error handling
 @app.errorhandler(404)
@@ -37,6 +37,7 @@ def generate():
             output = model.generate(keywords)
             return {
                 'status': 'OK',
+                'keywords': request.form['keywords'],
                 'result': output
             }
         except Exception as e:
