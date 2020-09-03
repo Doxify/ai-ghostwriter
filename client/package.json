@@ -9,6 +9,7 @@
     "axios": "^0.20.0",
     "bootstrap": "^5.0.0-alpha1",
     "node-sass": "^4.14.1",
+    "querystring": "^0.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

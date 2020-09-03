@@ -1,10 +1,15 @@
 import flask
 from flask import Flask, request
+from flask_pymongo import PyMongo
+import datetime
 
 from rnn import Model
 
 # Creating Flask app
 app = Flask(__name__)
+# Connecting to MongoDB
+app.config["MONGO_URI"] = "mongodb+srv://dev:XxlzXvNCvsTPatYY@cluster0.xxqj4.mongodb.net/ai-ghostwriter"
+mongo = PyMongo(app)
 # Loading the model
 model = Model('../model/input.txt', '../model/latest')
 
@@ -32,13 +37,20 @@ def generate():
                 'message': 'You must enter three keywords separated by a space.'
             }
 
-        # Detected three keywords, using the Model
         try:
+            # Generating via Model
             output = model.generate(keywords)
+            
+            # Saving result to database
+            post = {"keywords": keywords, 
+                    "output": output, 
+                    "created": datetime.datetime.utcnow()}
+            post_id = mongo.db.data.insert_one(post).inserted_id
+
             return {
                 'status': 'OK',
-                'keywords': request.form['keywords'],
-                'result': output
+                'result': output,
+                'id': str(post_id)
             }
         except Exception as e:
             print(str(e))
@@ -46,8 +58,6 @@ def generate():
                 'status': 'ERROR',
                 'message': 'Those keywords are not in the dictionary, try again.'
             }
-
-
 
 # Starting the server
 if __name__ == "__main__":

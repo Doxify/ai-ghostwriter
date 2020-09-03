@@ -1,6 +1,10 @@
 import React from 'react';
+import qs from 'querystring';
 import './components.scss';
 
+import { Redirect } from 'react-router-dom';
+
+import Reader from './reader/Reader';
 import axios from 'axios';
 
 class GeneratorButton extends React.Component {
@@ -8,9 +12,14 @@ class GeneratorButton extends React.Component {
         super(props);
 
         this.state = {
-            input: '',
-            type: '',
+            keywords: '',
             loading: false,
+            data: {
+                generated: false,
+                id: null,
+                result: null,
+                created: null
+            },
             error: ''
         }
 
@@ -24,22 +33,48 @@ class GeneratorButton extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const form = {
-            input: this.state.input
-        };
+        
+        let url = `http://localhost:5000/generate`;
+        let body = { keywords: this.state.keywords };
+        const config = {
+            headers: { 
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+    
 
-        // axios.post(`${process.env.REACT_APP_API_URL}/generate`, form)
-        //     .then((result) => {
-        //         if(result) {
-        //             // TODO: Successfully generated
-        //             // 1. Save generation id to local storage so you can view your past generations?
-        //             // 2. Save the input with the generation output (API idea)
-        //             // 3. Redirect to the expanded view page.
-        //         }
-        //     })
+        axios.post(url, qs.stringify(body), config)
+            .then((result) => {
+                if(result && result.data) {
+                    this.setState({ data: {
+                        id: result.data.id,
+                        result: result.data.result,
+                        generated: true
+                    }});
+                    // TODO:
+                    // 1. Save generation id to local storage so you can view your past generations?
+                    // 2. Save the input with the generation output (API idea)
+                    // 3. Redirect to the expanded view page.
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
     
     render() {
+        // Redirect on generation.
+        if(this.state.data.generated) {
+            return (
+                <Redirect to={{
+                    pathname: `/reader/${this.state.data.id}`,
+                    state: this.state.data
+                }} />
+                // <Reader id={this.state.data.id} output={this.state.data.result} />
+            )
+        }
+
+        // Else render button.
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="input-group">
@@ -48,8 +83,8 @@ class GeneratorButton extends React.Component {
                         id="generator-input"
                         type="text" 
                         className="form-control"
-                        name="input"
-                        value={this.state.input}
+                        name="keywords"
+                        value={this.state.keywords}
                         onChange={this.handleChange}
                         placeholder="Enter three words..."
                         aria-label="Text input with segmented dropdown button"

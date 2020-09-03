@@ -7,7 +7,7 @@ class Navigation extends React.Component {
         return ( 
             <div className="nav navbar navbar-expand-lg navbar-light bg-light shadow">
                 <div className="container">
-                    <img src={Logo} width="55" height="50" class="d-inline-block align-top" alt="logo" loading="lazy" />
+                    <img src={Logo} width="55" height="50" className="d-inline-block align-top" alt="logo" loading="lazy" />
                     <Link className="navbar-brand" to="/"> <mark> AI Ghostwriter </mark> </Link>
                     
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,11 +17,11 @@ class Navigation extends React.Component {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
                             <li>
-                                <Link className="nav-link" to="/generate">Generate</Link>
+                                <Link className="nav-link" to="/">Generate</Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link className="nav-link" to="/previous">Previous Works</Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link className="nav-link" to="/about">About</Link>
                             </li>

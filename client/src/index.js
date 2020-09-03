@@ -7,12 +7,12 @@ import './style.scss'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <div>
     <Router>
       <Navigation />
       <App />
     </Router>
-  </React.StrictMode>,
+  </div>,
   document.getElementById('root')
 );
 
