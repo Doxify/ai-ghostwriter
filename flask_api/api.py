@@ -1,22 +1,17 @@
-import flask
+import datetime
+import os
+
 from flask import Flask, request
 from flask_pymongo import PyMongo
-import datetime
-
+from dotenv import load_dotenv
 from rnn import Model
 
-# Creating Flask app
-app = Flask(__name__)
-# Connecting to MongoDB
-app.config["MONGO_URI"] = "mongodb+srv://dev:XxlzXvNCvsTPatYY@cluster0.xxqj4.mongodb.net/ai-ghostwriter"
+# Initializing API
+load_dotenv() # .env
+app = Flask(__name__) # Flask
+app.config["MONGO_URI"] = os.environ.get('mongo_uri') # MongoDB
 mongo = PyMongo(app)
-# Loading the model
-model = Model('../model/input.txt', '../model/latest')
-
-# Error handling
-@app.errorhandler(404)
-def page_not_found(error):
-    return 'This page does not exist.', 404
+model = Model('../model/input.txt', '../model/latest') # RNN Model
 
 # Main api endpoint, takes a POST request which requires three
 # words for the model to start generating off of. It will return
@@ -36,15 +31,12 @@ def generate():
                 'status': 'ERROR',
                 'message': 'You must enter three keywords separated by a space.'
             }
-
         try:
             # Generating via Model
             output = model.generate(keywords)
             
             # Saving result to database
-            post = {"keywords": keywords, 
-                    "output": output, 
-                    "created": datetime.datetime.utcnow()}
+            post = {"keywords": keywords, "output": output, "created": datetime.datetime.utcnow()}
             post_id = mongo.db.data.insert_one(post).inserted_id
 
             return {
@@ -59,7 +51,12 @@ def generate():
                 'message': 'Those keywords are not in the dictionary, try again.'
             }
 
+# Handles 404 Errors
+@app.errorhandler(404)
+def page_not_found(error):
+    return 'This page does not exist.', 404
+
 # Starting the server
 if __name__ == "__main__":
-	print('Loading API...')
+	print('Initializing Flask API')
 	app.run(debug=False, port=5000)
