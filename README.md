@@ -1,5 +1,5 @@
 # **AI Ghostwriter** (WIP)
-AI Ghostwriter is an app that uses RNN to generate texts in various languages. It contains a react web app to allow users to interact with the model and an express api to interface the model with react.
+AI Ghostwriter is an app that uses RNN to generate texts in various languages. It contains a react web app to allow users to interact with the model and a flask api to interface the model with react.
 
 ## CASHI REU
 ![image](https://cahsi.utep.edu/wp-content/uploads/cahsinameincludes_logo.png)
@@ -10,21 +10,16 @@ This project is part of the CASHI Virtual REU 2020 Summer program. I worked with
 1. Clone the repo
 2. Navigation to `~/client/`, this is the react client directory
 3. Install all dependencies with `npm install`
-4. Navigation to `~/api/`, this is the express api directory
-5. Install all dependencies with `npm install`
-6. You can now start the api and client, you must run `npm start` in both of their root directories.
+4. Navigation to `~/api/`, this is the flask api directory
+5. Install all dependencies with `?`
+6. Start the client via `npm start`
+7. Start the api via python `api.py`
 
-## Tasks:
+## Todo:
 
 * **React Web App**
-  * Organize file structure
-  * Implement wireframe
-  * Create methods for API calls
+  * Interface React w/ Flask Api
 
-* **Express API**
-  * Figure out how to interface express with a keras model
-  * API should be fairly simple, just take in keywords and return text.
-  
-## Wireframe:
-![image](https://i.imgur.com/GOZRLYC.png)
-![image](https://i.imgur.com/7VqznJo.png)
+* **Flask API**
+  * Add more info regarding the installation process
+

@@ -1,13 +1,13 @@
 import React from 'react';
 import GeneratorButton from '../GeneratorButton';
-import Thumbnail from '../generator/Thumbnail';
-import '../components.scss';
+// import Thumbnail from '../generator/Thumbnail';
+// import '../components.scss';
 
 
 class HeroGenerator extends React.Component {
     render() {
         return (
-            <div className="generator-container container-fluid mt-5 mb-5 shadow">
+            <div className="generator-container container mt-5 mb-5 shadow">
                 <div className="container mt-5 mb-5">
                     <div className="row">
                         {/* Generator Input */}
@@ -21,11 +21,11 @@ class HeroGenerator extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="row pb-5">
+                    {/* <div className="row pb-5">
                         <div className="col-sm-12 col-md-4 col-lg-4 text-center m-2">
                             <Thumbnail />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )
