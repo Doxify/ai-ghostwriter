@@ -1,3 +1,6 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "python.pythonPath": "py_virtual_env/ai-ghostwriter/bin/python3.8",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }

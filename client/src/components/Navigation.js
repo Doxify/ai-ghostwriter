@@ -7,7 +7,7 @@ class Navigation extends React.Component {
         return ( 
             <div className="nav navbar navbar-expand-lg navbar-light bg-light shadow">
                 <div className="container">
-                    <img src={Logo} width="55" height="50" className="d-inline-block align-top" alt="logo" loading="lazy" />
+                    <Link className="d-inline-block align-top" to="/"><img src={Logo} width="55" height="50" className="d-inline-block align-top" alt="logo" loading="lazy" /></Link>
                     <Link className="navbar-brand" to="/"> <mark> AI Ghostwriter </mark> </Link>
                     
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

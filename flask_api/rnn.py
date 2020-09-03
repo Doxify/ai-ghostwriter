@@ -61,5 +61,6 @@ class Model:
                 words = words[1:] + [pred_decoded]
             return output;
         except Exception as e:
-            print(str(e))
+            err = f"{str(e)} is not in the dictionary, try another word."
+            raise Exception(err)
         

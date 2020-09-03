@@ -9,7 +9,7 @@ import About from './components/about/About';
 function App() {
   return (
     <Switch>
-      <Route path="/reader/:id" component={Reader} />
+      <Route path="/reader" component={Reader} />
       <Route path="/about" component={About} />
       <Route exact path="/" component={Home} />
     </Switch>

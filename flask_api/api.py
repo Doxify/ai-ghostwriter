@@ -1,8 +1,11 @@
 import datetime
 import os
+import flask
 
-from flask import Flask, request
+from flask import Flask, Response, request
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
+from bson.json_util import dumps, RELAXED_JSON_OPTIONS
 from dotenv import load_dotenv
 from rnn import Model
 
@@ -21,7 +24,7 @@ model = Model('../model/input.txt', '../model/latest') # RNN Model
 #   keywords - String of three words separated by spaces
 @app.route('/generate', methods=["POST"])
 def generate():
-    if flask.request.method == "POST":
+    if request.method == "POST":
         # Request data
         keywords = request.form['keywords'].split(" ")
 
@@ -31,24 +34,50 @@ def generate():
                 'status': 'ERROR',
                 'message': 'You must enter three keywords separated by a space.'
             }
-        try:
-            # Generating via Model
-            output = model.generate(keywords)
-            
-            # Saving result to database
-            post = {"keywords": keywords, "output": output, "created": datetime.datetime.utcnow()}
-            post_id = mongo.db.data.insert_one(post).inserted_id
+        else:
+            try:
+                # Generating via Model
+                output = model.generate(keywords)
+                
+                # Saving result to database
+                post = {"keywords": keywords, "output": output, "created": datetime.datetime.utcnow()}
+                post_id = mongo.db.data.insert_one(post).inserted_id
 
-            return {
-                'status': 'OK',
-                'result': output,
-                'id': str(post_id)
-            }
+                return {
+                    'status': 'OK',
+                    'result': output,
+                    'id': str(post_id)
+                }
+            except Exception as e:
+                return {
+                    'status': 'ERROR',
+                    'message': str(e)
+                }
+
+@app.route('/getData', methods=["GET"])
+def getData():
+    if request.method == "GET":
+        try:
+            # Getting query args
+            args = request.args
+            
+            # Validating that id arg exists
+            if "id" in args:
+                id = args["id"]
+                # Getting data from database
+                data = mongo.db.data.find_one({"_id": ObjectId(id)})
+                formattedData = dumps(data, json_options=RELAXED_JSON_OPTIONS)
+                return Response(formattedData, mimetype='application/json')
+            else: 
+                return {
+                    'status': 'ERROR',
+                    'message': 'Missing required id parameter.'
+                }
         except Exception as e:
             print(str(e))
             return {
                 'status': 'ERROR',
-                'message': 'Those keywords are not in the dictionary, try again.'
+                'message': 'Server error occurred, try again later.'
             }
 
 # Handles 404 Errors
