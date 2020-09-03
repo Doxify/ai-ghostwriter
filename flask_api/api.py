@@ -2,6 +2,7 @@ import datetime
 import os
 import flask
 
+from flask_cors import CORS
 from flask import Flask, Response, request
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -9,9 +10,11 @@ from bson.json_util import dumps, RELAXED_JSON_OPTIONS
 from dotenv import load_dotenv
 from rnn import Model
 
+
 # Initializing API
 load_dotenv() # .env
-app = Flask(__name__) # Flask
+app = Flask(__name__, instance_relative_config=True) # Flask
+CORS(app)
 app.config["MONGO_URI"] = os.environ.get('mongo_uri') # MongoDB
 mongo = PyMongo(app)
 model = Model('../model/input.txt', '../model/latest') # RNN Model
