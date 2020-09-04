@@ -30,7 +30,7 @@ class Reader extends React.Component {
 
     getData(id) {
         this.setState({ loading: true });
-        axios.get(`http://localhost:5000/getData?id=${id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/getData?id=${id}`)
             .then((result) => {
                 if(result && result.data) {
                     let data = result.data;

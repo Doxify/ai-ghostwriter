@@ -33,7 +33,7 @@ class GeneratorButton extends React.Component {
         this.setState({ loading: true });
         event.preventDefault();
         
-        let url = `http://localhost:5000/generate`;
+        let url = `${process.env.REACT_APP_API_URL}/generate`;
         let body = { keywords: this.state.keywords };
         const config = {
             headers: { 
