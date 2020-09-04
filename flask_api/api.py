@@ -13,10 +13,9 @@ from rnn import Model
 
 # Initializing API
 load_dotenv() # .env
-app = Flask(__name__, instance_relative_config=True) # Flask
+app = Flask(__name__) # Flask
 CORS(app)
 app.config["MONGO_URI"] = os.environ.get('mongo_uri') # MongoDB
-app.config["APPLICATION_ROOT"] = "/api" # Routing
 mongo = PyMongo(app)
 model = Model('../model/input.txt', '../model/latest') # RNN Model
 
@@ -26,7 +25,7 @@ model = Model('../model/input.txt', '../model/latest') # RNN Model
 # 
 # Form Data:
 #   keywords - String of three words separated by spaces
-@app.route('/generate', methods=["POST"])
+@app.route('/api/generate', methods=["POST"])
 def generate():
     if request.method == "POST":
         # Request data
@@ -58,7 +57,7 @@ def generate():
                     'message': str(e)
                 }
 
-@app.route('/getData', methods=["GET"])
+@app.route('/api/getData', methods=["GET"])
 def getData():
     if request.method == "GET":
         try:
