@@ -9,7 +9,7 @@ class About extends React.Component {
         this.state = {
             input: ''
         }
-    }
+    } 
 
     componentDidMount() {
         // Getting input data from readme on github.
