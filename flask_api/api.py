@@ -16,6 +16,7 @@ load_dotenv() # .env
 app = Flask(__name__, instance_relative_config=True) # Flask
 CORS(app)
 app.config["MONGO_URI"] = os.environ.get('mongo_uri') # MongoDB
+app.config["APPLICATION_ROOT"] = "/api" # Routing
 mongo = PyMongo(app)
 model = Model('../model/input.txt', '../model/latest') # RNN Model
 
