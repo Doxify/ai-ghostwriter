@@ -16,10 +16,6 @@ This project is part of the CASHI Virtual REU 2020 Summer program. I worked with
 7. Start the api via python `api.py`
 
 ## Todo:
-
-* **React Web App**
-  * Interface React w/ Flask Api
-
 * **Flask API**
   * Add more info regarding the installation process
 
